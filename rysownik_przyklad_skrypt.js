@@ -76,11 +76,25 @@ var canvas, ctx, flag = false,
         }
     }
     
-    function save() {
-		var canvas = document.getElementById("can");
-		var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
-		window.location.href = image;
-    }
+    function save(id, fileName) {
+
+		//var fileName = "abcd";
+		//var id = "can";
+		var canvasElement = document.getElementById(id);
+
+		var MIME_TYPE = "image/png";
+
+		var imgURL = canvasElement.toDataURL(MIME_TYPE);
+
+		var dlLink = document.createElement('a');
+		dlLink.download = fileName;
+		dlLink.href = imgURL;
+		dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+
+		document.body.appendChild(dlLink);
+		dlLink.click();
+		document.body.removeChild(dlLink);
+	}
     
     function findxy(res, e) {
         if (res == 'down') {
