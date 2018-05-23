@@ -7,6 +7,7 @@ var canvas, ctx, flag = false,
 
     var x = "black",
         y = 2;
+	
     
     function init() {
         canvas = document.getElementById('can');
@@ -76,10 +77,9 @@ var canvas, ctx, flag = false,
     }
     
     function save() {
-        document.getElementById("canvasimg").style.border = "2px solid";
-        var dataURL = canvas.toDataURL();
-        document.getElementById("canvasimg").src = dataURL;
-        document.getElementById("canvasimg").style.display = "inline";
+		var canvas = document.getElementById("can");
+		var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
+		window.location.href = image;
     }
     
     function findxy(res, e) {
