@@ -10,11 +10,8 @@
 <body>
 
 <div class="container">
-	<div class="drawingcanvas">
-		<canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;align="right";>
-		</canvas>
-	</div>
-	<div class="btn-group-toolbar">
+	<div class="col-md-3">
+		<div class="btn-group-toolbar">
 		<p>
 			<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
 			<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
@@ -23,20 +20,33 @@
 			<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
 			<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
 		</p>
+		</div>
+		<div class="btn-group-tools">
+			<p><button type="button" style="height:75px;width:200px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save Composition </button></p>
+			<p><button type="button" style="height:75px;width:200px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span> Load Composition </button></p>
+		</div>
+		<div class="btn-group-color">
+			Current Color : 
+			<button type="button" class="btn btn-default btn-lg"></button>
+		</div>
+		<div class = "btn-group-radius">
+			Radius: 0 	
+			<button type="button" class="btn btn-default btn-lg">-</button>
+			<button type="button" class="btn btn-default btn-lg">+</button>
+		</div>
 	</div>
-	<div class="btn-group-tools">
-		<p><button type="button" style="height:75px;width:200px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save Composition </button></p>
-		<p><button type="button" style="height:75px;width:200px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span> Load Composition </button></p>
+	<div class="col-md-9">
+		<div class="drawingcanvas">
+		<canvas id="myCanvas" width="800" height="800" style="border:1px solid #000000;align="right";>
+		</canvas>
 	</div>
-	<div class="btn-group-color">
-		Current Color : 
-		<button type="button" class="btn btn-default btn-lg"></button>
+	
 	</div>
-	<div class = "btn-group-radius">
-		Radius: 0 	
-    	<button type="button" class="btn btn-default btn-lg">-</button>
-		<button type="button" class="btn btn-default btn-lg">+</button>
-    </div>
+
+
+
+
+
 </div>
 
 </body>
