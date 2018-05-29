@@ -8,8 +8,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="Validate.js"></script>
+  <script src="rysownik_przyklad_skrypt.js"></script>
 </head>
-<body>
+<body onload="init()">
 
 <div class="container">
 	<div class="col-md-10">
@@ -75,8 +76,11 @@
 		</p>
 		</div>
 		<div class="btn-group-tools">
-			<p><button type="button" style="height:75px;width:200px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save Composition </button></p>
+			<p><button type="button" style="height:75px;width:200px" onclick="save('can', 'asdf')" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save Composition </button></p>
 			<p><button type="button" style="height:75px;width:200px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span> Load Composition </button></p>
+		</div>
+		<div class="btn-group-edit">
+			<p><button type="button" value="clear" id="clr" onclick="erase()" style="height:75px;width:200px" class="btn btn-default btn-lg" ><span aria-hidden="true"></span> Clear Sketchpad </button></p>
 		</div>
 		<div class="btn-group-color">
 			Current Color : 
@@ -90,9 +94,10 @@
 	</div>
 	<div class="col-md-9">
 		<div class="drawingcanvas">
-		<canvas id="myCanvas" width="800" height="800" style="border:1px solid #000000;align="right";>
+		<canvas id="can" width="400" height="400" style="border:1px solid #000000;align="right";>
 		</canvas>
-	</div>
+		<img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+		</div>
 	
 	</div>
 
