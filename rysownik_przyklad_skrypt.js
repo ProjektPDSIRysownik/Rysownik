@@ -14,8 +14,6 @@ var canvas, ctx, flag = false,
         ctx = canvas.getContext("2d");
         w = canvas.width;
         h = canvas.height;
-		x = "black",
-        y = 2;
     
         canvas.addEventListener("mousemove", function (e) {
             findxy('move', e)
