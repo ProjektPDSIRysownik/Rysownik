@@ -29,7 +29,7 @@
 						<br><br>
 						<input type = "password" id = "pass" placeholder="Password">
 						<br><br>
-						<button onclick = "validate()"class="btn btn-sm btn-primary">Login</button>						
+						<button onclick = "validateLogin()"class="btn btn-sm btn-primary">Login</button>						
 						<br><br>
 						<button class="btn btn-sm btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
 					</div>
@@ -44,15 +44,15 @@
 					<h3>Create an account</h3>
 				</div>
 				<div class="modal-body">
-					<input type="name" placeholder="Username">
+					<input type="name" id="signName" placeholder="Username">
 					<br><br>
-					<input type="e-mail" placeholder="E-mail">
+					<input type="e-mail" id = "signMail" placeholder="E-mail">
 					<br><br>
-					<input type="password" placeholder="Password">
+					<input type="password" id = "signPass" placeholder="Password">
 					<br><br>
-					<input type="password" placeholder="Re-type Password">
+					<input type="password" id = "signPassRepeat" placeholder="Re-type Password">
 					<br><br>					
-					<button class="btn btn-primary btn-sm">Sign Up</button>
+					<button class="btn btn-primary btn-sm" onclick="validateSignUp()">Sign Up</button>
 					<br><br>
 					<a  data-dismiss="modal" data-toggle="modal" data-target="#myModal">Already Have an account?</a>
 				</div>
