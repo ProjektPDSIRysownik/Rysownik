@@ -6,10 +6,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="Validate.js"></script>
 </head>
 <body>
 
 <div class="container">
+	<div class="col-md-10">
+		<div class="btn-group-login">
+			<button type="button" style="height:50px;width:100px" class = "btn btn-primary" data-toggle="modal" data-target="#myModal" >
+				Login
+			</button>
+		</div>
+		
+		<div class="modal fade text-center" id="myModal" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button class="close" data-dismiss="modal">×</button>
+						<h3>Login</h3>
+					</div>
+					<div class="modal-body">
+						<input type = "name" id = "username" placeholder="Username">
+						<br><br>
+						<input type = "password" id = "pass" placeholder="Password">
+						<br><br>
+						<button onclick = "validateLogin()"class="btn btn-sm btn-primary">Login</button>						
+						<br><br>
+						<button class="btn btn-sm btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade text-center" id="signUpModal" role="dialog">
+			<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal">×</button>
+					<h3>Create an account</h3>
+				</div>
+				<div class="modal-body">
+					<input type="name" id="signName" placeholder="Username">
+					<br><br>
+					<input type="e-mail" id = "signMail" placeholder="E-mail">
+					<br><br>
+					<input type="password" id = "signPass" placeholder="Password">
+					<br><br>
+					<input type="password" id = "signPassRepeat" placeholder="Re-type Password">
+					<br><br>					
+					<button class="btn btn-primary btn-sm" onclick="validateSignUp()">Sign Up</button>
+					<br><br>
+					<a  data-dismiss="modal" data-toggle="modal" data-target="#myModal">Already Have an account?</a>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+	
 	<div class="col-md-3">
 		<div class="btn-group-toolbar">
 		<p>
