@@ -11,6 +11,7 @@ var canvas, ctx, flag = false,
     
     function init() {
         canvas = document.getElementById('can');
+		document.getElementById("radius").innerHTML = y;
         ctx = canvas.getContext("2d");
         w = canvas.width;
         h = canvas.height;
@@ -53,8 +54,6 @@ var canvas, ctx, flag = false,
                 x = "white";
                 break;
         }
-        if (x == "white") y = 14;
-        else y = 2;
     
     }
     
@@ -76,10 +75,9 @@ var canvas, ctx, flag = false,
         }
     }
     
-    function save(id, fileName) {
+    function save(id) {
 
-		//var fileName = "abcd";
-		//var id = "can";
+		var fileName = document.getElementById("filename").value;
 		var canvasElement = document.getElementById(id);
 
 		var MIME_TYPE = "image/png";
@@ -126,3 +124,14 @@ var canvas, ctx, flag = false,
             }
         }
     }
+	
+	function moreRadius() {
+        y = y + 1;
+		document.getElementById("radius").innerHTML = y;
+    }
+	
+	function lessRadius(){
+		y = y - 1;
+		if(y<1) y=1;
+		document.getElementById("radius").innerHTML = y;
+	}

@@ -8,8 +8,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="Validate.js"></script>
+  <script src="rysownik_przyklad_skrypt.js"></script>
 </head>
-<body>
+<body onload="init()">
 
 <div class="container">
 	<div class="col-md-10">
@@ -40,66 +41,82 @@
 		</div>
 		<div class="modal fade text-center" id="signUpModal" role="dialog">
 			<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button class="close" data-dismiss="modal">×</button>
-					<h3>Create an account</h3>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button class="close" data-dismiss="modal">×</button>
+						<h3>Create an account</h3>
+					</div>
+					<div class="modal-body">
+						<input type="name" id="signName" placeholder="Username">
+						<br><br>
+						<input type="e-mail" id = "signMail" placeholder="E-mail">
+						<br><br>
+						<input type="password" id = "signPass" placeholder="Password">
+						<br><br>
+						<input type="password" id = "signPassRepeat" placeholder="Re-type Password">
+						<br><br>					
+						<button class="btn btn-primary btn-sm" onclick="validateSignUp()">Sign Up</button>
+						<br><br>
+						<a  data-dismiss="modal" data-toggle="modal" data-target="#myModal">Already Have an account?</a>
+					</div>
 				</div>
-				<div class="modal-body">
-					<input type="name" id="signName" placeholder="Username">
-					<br><br>
-					<input type="e-mail" id = "signMail" placeholder="E-mail">
-					<br><br>
-					<input type="password" id = "signPass" placeholder="Password">
-					<br><br>
-					<input type="password" id = "signPassRepeat" placeholder="Re-type Password">
-					<br><br>					
-					<button class="btn btn-primary btn-sm" onclick="validateSignUp()">Sign Up</button>
-					<br><br>
-					<a  data-dismiss="modal" data-toggle="modal" data-target="#myModal">Already Have an account?</a>
-				</div>
-			</div>
 			</div>
 		</div>
 	</div>
 	
 	<div class="col-md-3">
 		<div class="btn-group-toolbar">
-		<p>
-			<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
-			<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-		</p>
-		<p>
-			<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
-			<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
-		</p>
+			<p>
+				<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
+				<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+			</p>
+			<p>
+				<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
+				<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
+			</p>
 		</div>
 		<div class="btn-group-tools">
-			<p><button type="button" style="height:75px;width:200px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save Composition </button></p>
+			<p><button type="button" style="height:75px;width:200px" data-toggle="modal" data-target="#saveModal" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save Composition </button></p>
+				<div class="modal fade text-center" id="saveModal" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button class="close" data-dismiss="modal">×</button>
+							<h3>Save image</h3>
+						</div>
+						<div class="modal-body">
+							<input type = "name" id = "filename" placeholder="FileName">
+							<br><br>
+							<button onclick = "save('can')" class="btn btn-sm btn-primary">Save image</button>
+						</div>
+					</div>
+				</div>
+				</div>
 			<p><button type="button" style="height:75px;width:200px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span> Load Composition </button></p>
 		</div>
+		<div class="btn-group-edit">
+			<p><button type="button" value="clear" id="clr" onclick="erase()" style="height:75px;width:200px" class="btn btn-default btn-lg" ><span aria-hidden="true"></span> Clear Sketchpad </button></p>
+		</div>
 		<div class="btn-group-color">
-			Current Color : 
-			<button type="button" class="btn btn-default btn-lg"></button>
+			Choose Color : 
+			<button type="button" id="black" onclick="color(this)" class="btn btn-default btn-lg" style="background:black"></button>
+			<button type="button" id="green" onclick="color(this)" class="btn btn-default btn-lg" style="background:green"></button>
+			<button type="button" id="blue" onclick="color(this)" class="btn btn-default btn-lg" style="background:blue"></button>
+			<button type="button" id="red" onclick="color(this)" class="btn btn-default btn-lg" style="background:red"></button>
+			<button type="button" id="yellow" onclick="color(this)" class="btn btn-default btn-lg" style="background:yellow"></button>
+			<button type="button" id="orange" onclick="color(this)" class="btn btn-default btn-lg" style="background:orange"></button>
 		</div>
 		<div class = "btn-group-radius">
-			Radius: 0 	
-			<button type="button" class="btn btn-default btn-lg">-</button>
-			<button type="button" class="btn btn-default btn-lg">+</button>
+			Radius: <span id="radius"> </span>
+			<button type="button" onclick="lessRadius()" class="btn btn-default btn-lg">-</button>
+			<button type="button" onclick="moreRadius()" class="btn btn-default btn-lg">+</button>
 		</div>
 	</div>
-	<div class="col-md-9">
-		<div class="drawingcanvas">
-		<canvas id="myCanvas" width="800" height="800" style="border:1px solid #000000;align="right";>
-		</canvas>
-	</div>
-	
-	</div>
-
-
-
-
-
+	<div>
+		<div>
+			<canvas id="can" width="640" height="480" style="border:1px solid #000000;align="right";></canvas>
+			<img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+		</div>	
 </div>
 
 </body>
