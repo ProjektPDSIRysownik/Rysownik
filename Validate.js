@@ -21,6 +21,16 @@ function validateSignUp(){
 	var signPassRepeat = document.getElementById("signPassRepeat");
 
 	//todo : sprawdzic czy username i email istnieje w bazie
+	
+	if(signName.value.length <=4){
+		alert("Username must be at least 5 characters long");
+		return 0;
+	}
+	if(!mailCheck(signMail.value)){
+		alert("Email adress is not correct");
+		return 0;
+	}
+
 	if(signPass.value != signPassRepeat.value){
 		alert("passwords are not same");
 		return 0;
@@ -29,6 +39,11 @@ function validateSignUp(){
 		//todo: dodac usera do bazy
 		alert("registration succesfull");
 	}
+}
+
+function mailCheck(mail){
+	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(String(mail).toLowerCase());
 }
 
 function passwordCheck(password){
