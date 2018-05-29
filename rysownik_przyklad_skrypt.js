@@ -76,10 +76,9 @@ var canvas, ctx, flag = false,
         }
     }
     
-    function save(id, fileName) {
+    function save(id) {
 
-		//var fileName = "abcd";
-		//var id = "can";
+		var fileName = document.getElementById("filename").value;
 		var canvasElement = document.getElementById(id);
 
 		var MIME_TYPE = "image/png";

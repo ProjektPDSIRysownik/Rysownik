@@ -76,7 +76,22 @@
 		</p>
 		</div>
 		<div class="btn-group-tools">
-			<p><button type="button" style="height:75px;width:200px" onclick="save('can', 'asdf')" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save Composition </button></p>
+			<p><button type="button" style="height:75px;width:200px" data-toggle="modal" data-target="#saveModal" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save Composition </button></p>
+				<div class="modal fade text-center" id="saveModal" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button class="close" data-dismiss="modal">×</button>
+							<h3>Save image</h3>
+						</div>
+						<div class="modal-body">
+							<input type = "name" id = "filename" placeholder="FileName">
+							<br><br>
+							<button onclick = "save('can')" class="btn btn-sm btn-primary">Save image</button>
+						</div>
+					</div>
+				</div>
+				</div>
 			<p><button type="button" style="height:75px;width:200px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span> Load Composition </button></p>
 		</div>
 		<div class="btn-group-edit">
