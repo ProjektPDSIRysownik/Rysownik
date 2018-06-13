@@ -5,11 +5,11 @@ var password = document.getElementById("pass").value;
 // todo: do zmiany na odczyt z bazy danych
 // todo: hasło haszowane zamiast plain tekstu
 if( username == "user" && password == "Password123"){
-	alert ("login succesfull");
+	alert ("Login successful!");
 	//todo: logowanie
 }
 else{
-	alert("login and/or password are incorrect");
+	alert("Login and/or password are not valid.");
 }
 
 }
@@ -23,21 +23,21 @@ function validateSignUp(){
 	//todo : sprawdzic czy username i email istnieje w bazie
 	
 	if(signName.value.length <=4){
-		alert("Username must be at least 5 characters long");
+		alert("Username must be at least five characters long.");
 		return 0;
 	}
 	if(!mailCheck(signMail.value)){
-		alert("Email adress is not correct");
+		alert("Email address is not correct. Please try again");
 		return 0;
 	}
 
 	if(signPass.value != signPassRepeat.value){
-		alert("passwords are not same");
+		alert("Passwords do not match. Please try again.");
 		return 0;
 	}
 	if(passwordCheck(signPass)){
 		//todo: dodac usera do bazy
-		alert("registration succesfull");
+		alert("Registration successful!");
 	}
 }
 
@@ -52,19 +52,19 @@ function passwordCheck(password){
 	var numbers = /[0-9]/g;
 
 	if(!password.value.match(lowerCase)){
-		alert("password need to have at least 1 lower case letter");
+		alert("Password needs to have at least one lower-case letter.");
 		return 0;
 	}
 	if(!password.value.match(upperCase)){
-		alert("password need to have at least 1 upper case letter");
+		alert("Password needs to have at least one upper-case letter.");
 		return 0;
 	}
 	if(!password.value.match(numbers)){
-		alert("password need to have at least 1 number");
+		alert("Password needs to have at least one numeric character.");
 		return 0;	
 	}
 	if(!(password.value.length >= 8)){
-		alert("password need to be at least 8 characters long");
+		alert("Password needs to be at least 8 characters long.");
 		return 0;	
 	}
 	return 1;
