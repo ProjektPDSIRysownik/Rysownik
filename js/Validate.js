@@ -2,6 +2,7 @@ function validateLogin(){
 var username = document.getElementById("username").value;
 var password = document.getElementById("pass").value;
 
+//checkIfUserIsAlreadyInDatabase(username, password);
 // todo: do zmiany na odczyt z bazy danych
 // todo: hasło haszowane zamiast plain tekstu
 if( username == "user" && password == "Password123"){
@@ -36,7 +37,7 @@ function validateSignUp(){
 		return 0;
 	}
 	if(passwordCheck(signPass)){
-		//todo: dodac usera do bazy
+		addUserToDatabase(signName.value, signMail.value, signPass.value);
 		alert("Registration successful!");
 	}
 }

@@ -40,9 +40,9 @@ if ($conn->connect_error)
 
 $sql = "CREATE TABLE Users (
     User_ID INT(6) AUTO_INCREMENT PRIMARY KEY,
-    login VARCHAR(30) NOT NULL,
-    Password VARCHAR(30) NOT NULL,
-    email VARCHAR(50)
+    login VARCHAR(100) NOT NULL,
+    Password VARCHAR(100) NOT NULL,
+    email VARCHAR(100)
     )";
 
 
@@ -59,8 +59,7 @@ else
 
 //////////////////////////////////////////////////
 
-$sql = "INSERT INTO `users`(`login`, `Password`, `email`) VALUES ('marcin21','superTajnyHashHasla','miarcin21@o2.pl')";
-
+$sql = 'INSERT INTO users (gameID, gamePlayerOne, gamePlayerTwo) VALUES ("' . $gameID . '","' . $playerOne . '","' . $playerTwo . '")';
 if ($conn->query($sql) === TRUE) {
     echo "Test record created successfully.\r\n";
 } else {
