@@ -16,10 +16,7 @@ $login = $_POST["login"];
 $passwd = $_POST["passwd"];
 $mail = $_POST["email"];
 
-//$sql = 'INSERT INTO users (login, Password, email) VALUES ("' . $login . '","' . $passwd . '","' . $mail . '")';
-// NAWET DZIAŁA
-$sql = 'INSERT INTO users (login, Password, email) VALUES (' . $login . ',' . $passwd . ',' . $mail . ')';
-
+$sql = 'INSERT INTO users (login, Password, email) VALUES ("' . $login . '","' . $passwd . '","' . $mail . '")';
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
 } else {
