@@ -1,4 +1,4 @@
-function addUserToDatabase(signName, signPass, signMail) {
+function addUserToDatabase(signName, signMail, signPass) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -7,5 +7,5 @@ function addUserToDatabase(signName, signPass, signMail) {
     };
     xhttp.open("POST", "http://localhost/serverCode/addUserToDatabase.php", true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send("login='" + signName + "'&passwd='" + signPass + + "'&email='" + signMail +"'");
+    xhttp.send("login='" + signName + "'&passwd='" + signPass + "'&email='" + signMail +"'");
 }

@@ -37,10 +37,7 @@ function validateSignUp(){
 		return 0;
 	}
 	if(passwordCheck(signPass)){
-		var signName2 = document.getElementById("signName").value;
-		var signMail2 = document.getElementById("signMail").value;
-		var signPass2 = document.getElementById("signPass").value;
-		addUserToDatabase(signName2, signPass2, signMail2);
+		addUserToDatabase(signName.value, signMail.value, signPass.value);
 		alert("Registration successful!");
 	}
 }
