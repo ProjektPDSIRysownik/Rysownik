@@ -15,7 +15,7 @@ if ($conn->connect_error)
 $sql = "CREATE DATABASE rysownik";
 if ($conn->query($sql) === TRUE) 
 {
-    echo "Database created successfully";
+    echo "Database created successfully\r\n";
 } 
 else 
 {
@@ -48,7 +48,7 @@ $sql = "CREATE TABLE Users (
 
 if ($conn->query($sql) === TRUE) 
 {
-    echo "Table created successfully";
+    echo "Table created successfully\r\n";
 } 
 else 
 {
@@ -59,12 +59,10 @@ else
 
 //////////////////////////////////////////////////
 
-
-
-$sql = INSERT INTO `users`(`login`, `Password`, `email`) VALUES ('marcin21','superTajnyHashHasla','miarcin21@o2.pl')
+$sql = "INSERT INTO `users`(`login`, `Password`, `email`) VALUES ('marcin21','superTajnyHashHasla','miarcin21@o2.pl')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Test record created successfully.";
+    echo "Test record created successfully.\r\n";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
@@ -82,7 +80,7 @@ if ($conn->query($sql) === TRUE) {
 
 
 
-$sql = "CREATE TABLE Image (
+$sql = "CREATE TABLE imageTable (
     Image_ID INT(6) AUTO_INCREMENT PRIMARY KEY,
     User_ID INT(6),   
     FOREIGN KEY (User_ID) 
@@ -92,7 +90,7 @@ $sql = "CREATE TABLE Image (
 
 if ($conn->query($sql) === TRUE) 
 {
-    echo "Table created successfully";
+    echo "Table created successfully\r\n";
 } 
 else 
 {
@@ -105,10 +103,10 @@ else
 
 
 
-$sql = INSERT INTO `image`(`User_ID`, `IMAGE`) VALUES (1,'superKodUrLDoObrazka')
+$sql = "INSERT INTO `imageTable`(`User_ID`, `IMAGE`) VALUES (1,'superKodUrLDoObrazka')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Test record created successfully.";
+    echo "Test record created successfully.\r\n";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
