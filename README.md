@@ -12,6 +12,10 @@ aplikacja jest responsywna (testuj na urządzeniach mobilnych);
 dane aplikacji powinny być przechowywane w bazie MySQL.
 
 
+
 SETUP:
-Wszystkie pliki w folderze serverCode należy przenieść do folderu htdocs gdzie zlokalizowany jest xampp
-następnie należy uruchomić plik inicjalizacyjny initializeDatabase jeżeli na danym komputerze nie ma postawionej bazy Rysownik
+
+1. Uruchom XAMPP, Apache oraz MySQL
+2. Przenieś pliki z folderu serverCode do folderu htdocs gdzie zainstalowany jest xampp
+3. Z poziomu przeglądarki uruchom plik initializeDatabase (http://localhost/initializeDatabase.php)
+4. Sprawdź poprawnosć działania tego kodu wchodząc na panel admina i sprawdź czy istnieje nowa baza danych "rysownik"

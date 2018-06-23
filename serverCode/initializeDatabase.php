@@ -59,7 +59,7 @@ else
 
 //////////////////////////////////////////////////
 
-$sql = 'INSERT INTO users (gameID, gamePlayerOne, gamePlayerTwo) VALUES ("' . $gameID . '","' . $playerOne . '","' . $playerTwo . '")';
+$sql = "INSERT INTO `users`(`login`, `Password`, `email`) VALUES ('marcin12', 'hashedpasswd','dawi@daks.pl')";
 if ($conn->query($sql) === TRUE) {
     echo "Test record created successfully.\r\n";
 } else {
