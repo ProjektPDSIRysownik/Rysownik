@@ -6,6 +6,9 @@ var password = document.getElementById("pass").value;
 // todo: do zmiany na odczyt z bazy danych
 // todo: hasło haszowane zamiast plain tekstu
 //if( <?php validateUser(username, password)){
+
+var chuj = verifyUserLogin(username, password);
+alert(chuj);
 if( validateUser(username, password)){
 	alert ("Login successful!");
 	//todo: logowanie

@@ -3,7 +3,8 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "rysownik";
-
+print "dupa";
+return "dupsko"
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -21,8 +22,10 @@ $sql = ("SELECT * FROM users u WHERE u.login ='$login' AND u.Password='$passwd'"
 if ($conn->query($sql) === TRUE) {
     echo "User found";
     //return TRUE;
+    return "CHUJ";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
+    return "CHUJ";//return FALSE;
 }
 
 $conn->close();
