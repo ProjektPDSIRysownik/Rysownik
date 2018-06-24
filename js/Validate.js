@@ -5,7 +5,8 @@ var password = document.getElementById("pass").value;
 //checkIfUserIsAlreadyInDatabase(username, password);
 // todo: do zmiany na odczyt z bazy danych
 // todo: hasło haszowane zamiast plain tekstu
-if( username == "user" && password == "Password123"){
+//if( <?php validateUser(username, password)){
+if( validateUser(username, password)){
 	alert ("Login successful!");
 	//todo: logowanie
 }
