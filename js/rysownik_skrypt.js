@@ -1,4 +1,4 @@
-var canvas, ctx, flag = false,
+var canvas, context, flag = false,
     prevX = 0,
     currX = 0,
     prevY = 0,
@@ -194,11 +194,11 @@ function colorPick(obj) {
 }
 
 function erase() {
-    var m = confirm("Want to clear");
-    if (m) {
-        context.clearRect(0, 0, canvasWidth, canvasHeight);
-        document.getElementById("canvasimg").style.display = "none";
-    }
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
+}
+
+function clearCanvas() {
+	context.clearRect(0, 0, canvasWidth, canvasHeight);
 }
 
 function save(id) {
@@ -229,4 +229,13 @@ function lessRadius() {
     radius = radius - 1;
     if (radius < 1) radius = 1;
     document.getElementById("radius").innerHTML = radius;
+}
+
+function load(imagesrc) {
+    var img = new Image();
+    
+    img.onload = function () {
+        context.drawImage(img, 0, 0);
+    }
+    img.src = imagesrc;
 }
