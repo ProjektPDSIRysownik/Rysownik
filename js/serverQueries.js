@@ -1,11 +1,27 @@
 function addUserToDatabase(signName, signMail, signPass) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    var xmlhttp = new XMLHttpRequest();
+    var addUserStatus = "NO";
+    xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        alert(this.responseText);
+        addUserStatus = this.responseText;
+        return addUserStatus;
       }
     };
-    xhttp.open("POST", "http://localhost/serverCode/addUserToDatabase.php", true);
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send("login='" + signName + "'&passwd='" + signPass + "'&email='" + signMail +"'");
+    xmlhttp.open("POST", "http://localhost/serverCode/addUserToDatabase.php", true);
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp.send("login='" + signName + "'&passwd='" + signPass + "'&email='" + signMail +"'");
+}
+
+function checkForLastLoggedInUser()
+{
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+        return myObj.status;            // nie dziala jak powinno
+    }
+};
+xmlhttp.open("GET", "http://localhost/serverCode/checkLastLoggedInUser.php", true);
+xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xmlhttp.send(); 
 }

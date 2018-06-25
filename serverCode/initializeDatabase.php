@@ -4,8 +4,6 @@ $username = "root";
 $password = "";
 $dbname = "rysownik";
 
-
-
 $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) 
 {
@@ -115,4 +113,43 @@ if ($conn->query($sql) === TRUE) {
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////
+///////////////////CURRLOGUSER////////////////////
+//////////////////////////////////////////////////
+
+/*
+This table is supposed to store either zero values 
+or one value to identify the user 
+that was logged into the app for the last time
+*/
+
+$sql = "CREATE TABLE currentlyLoggedInUser (
+    login VARCHAR(100) NOT NULL,
+    Password VARCHAR(100) NOT NULL,
+    email VARCHAR(100)
+    )";
+
+
+if ($conn->query($sql) === TRUE) 
+{
+    echo "Table created successfully\r\n";
+} 
+else 
+{
+    echo "Error creating table: " . $conn->error;
+}
+
+
+
+//////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+
+
 ?>

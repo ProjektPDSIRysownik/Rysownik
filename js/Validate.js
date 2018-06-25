@@ -38,7 +38,17 @@ function validateSignUp(){
 	}
 	if(passwordCheck(signPass)){
 		addUserToDatabase(signName.value, signMail.value, signPass.value);
-		alert("Registration successful!");
+		// tutaj zrobic weryfikacje czy wszystko poszlo dobrze
+		/*
+		if(addStatus == "OK")
+		{
+			alert("Registration successful!");
+		}
+		else
+		{
+			alert("Registration error.");
+		}
+		*/
 	}
 }
 
