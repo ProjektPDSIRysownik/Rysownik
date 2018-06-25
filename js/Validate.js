@@ -7,9 +7,9 @@ var password = document.getElementById("pass").value;
 // todo: hasło haszowane zamiast plain tekstu
 //if( <?php validateUser(username, password)){
 
-var chuj = verifyUserLogin(username, password);
-alert(chuj);
-if( validateUser(username, password)){
+//var test = verifyUserLogin(username, password);
+//alert(test);
+if( validateUser(username, password) == 123){
 	alert ("Login successful!");
 	//todo: logowanie
 }
