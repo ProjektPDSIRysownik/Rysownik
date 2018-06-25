@@ -1,8 +1,4 @@
 var canvas, context, flag = false,
-    prevX = 0,
-    currX = 0,
-    prevY = 0,
-    currY = 0,
     canvasWidth = 0,
     canvasHeight = 0,
     clickX = new Array(),
@@ -12,11 +8,10 @@ var canvas, context, flag = false,
     clickSize = new Array(),
     clickDrag = new Array(),
     curTool = "pencil",
-    mediumStartX = 0,
-    mediumStartY = 0,
+    mediumStartX = 200,
+    mediumStartY = 200,
     drawingAreaX = 0,
     drawingAreaY = 0,
-    dot_flag = false,
     paint = false;
 
 var color = "black",
@@ -76,57 +71,7 @@ function clearCanvas() {
 */
 function redraw() {
 
-    clearCanvas();
-
-    var locX;
-    var locY;
-
-    if (curTool == "pencil") {
-
-        locX = 18;
-        locY = 19;
-
-        context.beginPath();
-        context.moveTo(locX + 10, locY + 24);
-        context.lineTo(locX + 10, locY + 24);
-        context.lineTo(locX + 22, locY + 16);
-        context.lineTo(locX + 22, locY + 31);
-        context.closePath();
-        context.fillStyle = color;
-        context.fill();
-
-        //context.drawImage(null, locX, locY, mediumImageWidth, mediumImageHeight);
-    }
-    /*else if (curTool == "eraser") {
-        context.drawImage(eraserBackgroundImage, 0, 0, canvas.width, canvas.height);
-        context.drawImage(eraserImage, 18, 19, mediumImageWidth, mediumImageHeight);
-    } else {
-        alert("Error: Current Tool is undefined");
-    }*/
-
-    locX = 475; //- 5 * radius;
-    /*if (curSize == "small") {
-        locX = 467;
-    } else if (curSize == "normal") {
-        locX = 450;
-    } else if (curSize == "large") {
-        locX = 428;
-    } else if (curSize == "huge") {
-        locX = 399;
-    }*/
-
-    locY = 189;
-    context.beginPath();
-    context.rect(locX, locY, 2, 12);
-    context.closePath();
-    context.fillStyle = '#333333';
-    context.fill();
-
-    // Keep the drawing in the drawing area
-    context.save();
-    context.beginPath();
-    context.rect(drawingAreaX, drawingAreaY, canvasWidth, canvasHeight);
-    context.clip();
+    clearCanvas()
 
     var i = 0;
     for (; i < clickX.length; i++) {
@@ -141,28 +86,16 @@ function redraw() {
         context.closePath();
 
         if (clickTool[i] == "eraser") {
-            //context.globalCompositeOperation = "destination-out"; // To erase instead of draw over with white
             context.strokeStyle = 'white';
         } else {
-            //context.globalCompositeOperation = "source-over";	// To erase instead of draw over with white
             context.strokeStyle = clickColor[i];
         }
+
         context.lineJoin = "round";
-        context.lineWidth = radius;
+        context.lineWidth = clickSize[i];
         context.stroke();
 
     }
-    //context.globalCompositeOperation = "source-over";// To erase instead of draw over with white
-    context.restore();
-
-    // Overlay a crayon texture (if the current tool is crayon)
-    /*if (curTool == "crayon") {
-        context.globalAlpha = 0.4; // No IE support
-        context.drawImage(crayonTextureImage, 0, 0, canvasWidth, canvasHeight);
-    }
-    context.globalAlpha = 1; // No IE support*/
-
-    // Draw the outline image
 }
 
 
@@ -191,14 +124,6 @@ function colorPick(obj) {
             break;
     }
 
-}
-
-function erase() {
-    context.clearRect(0, 0, canvasWidth, canvasHeight);
-}
-
-function clearCanvas() {
-	context.clearRect(0, 0, canvasWidth, canvasHeight);
 }
 
 function save(id) {
