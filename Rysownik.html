@@ -15,10 +15,10 @@
 <body onload="init()">
 
 <div class="container">
-	<div class="col-md-10">
+	<div class="col-md-12">
 		<div class="btn-group-login">
-			<button type="button" style="height:50px;width:100px" class = "btn btn-primary" data-toggle="modal" data-target="#myModal" >
-				Login
+			<button type="button" style="height:75px;width:200px" class = "btn btn-primary" data-toggle="modal" data-target="#myModal" >
+				Login/Register
 			</button>
 		</div>
 		
@@ -59,7 +59,7 @@
 						<br><br>					
 						<button class="btn btn-primary btn-sm" onclick="validateSignUp()">Sign Up</button>
 						<br><br>
-						<a  data-dismiss="modal" data-toggle="modal" data-target="#myModal">Already Have an account?</a>
+						<a  data-dismiss="modal" data-toggle="modal" data-target="#myModal">If you have an account already, click here.</a>
 					</div>
 				</div>
 			</div>
@@ -67,16 +67,6 @@
 	</div>
 	
 	<div class="col-md-3">
-		<div class="btn-group-toolbar">
-			<p>
-				<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
-				<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-			</p>
-			<p>
-				<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
-				<button type="button" style="height:50px;width:50px" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
-			</p>
-		</div>
 		<div class="btn-group-tools">
 			<p><button type="button" style="height:75px;width:200px" data-toggle="modal" data-target="#saveModal" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save Composition </button></p>
 				<div class="modal fade text-center" id="saveModal" role="dialog">
@@ -100,7 +90,7 @@
 			<p><button type="button" value="clear" id="clr" onclick="erase()" style="height:75px;width:200px" class="btn btn-default btn-lg" ><span aria-hidden="true"></span> Clear Sketchpad </button></p>
 		</div>
 		<div class="btn-group-color">
-			Choose Color : 
+			Pick a color : 
 			<button type="button" id="black" onclick="color(this)" class="btn btn-default btn-lg" style="background:black"></button>
 			<button type="button" id="green" onclick="color(this)" class="btn btn-default btn-lg" style="background:green"></button>
 			<button type="button" id="blue" onclick="color(this)" class="btn btn-default btn-lg" style="background:blue"></button>
