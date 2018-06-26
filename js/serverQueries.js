@@ -25,12 +25,25 @@ function addUserToSession(signName){
 
         if(this.readyState == 4 && this.status == 200){
             currLogInUserName = signName;
-            alert("Aktualnie zalogowany user: " + currLogInUserName);
         }
     }
-    xmlhttp.open("POST", "http://localhost/serverCode/addUserToCurrentSession.php", true);
+    xmlhttp.open("POST", "http://localhost/serverCode/operateCurrentSession.php", true);
     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xmlhttp.send("login=" + signName + "&email=" + signMail);
+    xmlhttp.send("login=" + signName);
+
+}
+
+function logOutFromSession(){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function(){
+
+        if(this.readyState == 4 && this.status == 200){
+            currLogInUserName = none;
+        }
+    }
+    xmlhttp.open("POST", "http://localhost/serverCode/removeSession.php", true);
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp.send();
 
 }
 
@@ -113,4 +126,9 @@ function getUserImages(){
 function getLoginStatus()
 {
     return lastUserStatus;
+}
+
+function getLastLoginUserName()
+{
+    return currLogInUserName;
 }

@@ -8,7 +8,7 @@ function validateLogin()
 	if(lastUserStatus == "BRAK")
 	{
 		loginUser(username, password);
-		addUserToSession(username)
+		addUserToSession(username); // dodaj do sesji
 		var msg = getMsg();
 		console.log(msg);
 		if(getMsg() == "Zalogowano pomyslnie!"){
@@ -76,3 +76,12 @@ function passwordCheck(password){
 	return 1;
 
 }
+
+
+function logOutFromSess()
+{
+	logOutFromSession(); // usun z sesji
+	alert("Wylogowano.");
+	document.getElementById('user_login').innerHTML = ""; 
+}
+
