@@ -1,140 +1,223 @@
-var canvas, ctx, flag = false,
-        prevX = 0,
-        currX = 0,
-        prevY = 0,
-        currY = 0,
-        dot_flag = false;
+var canvas, context, flag = false,
+    canvasWidth = 0,
+    canvasHeight = 0,
+    clickX = new Array(),
+    clickY = new Array(),
+    clickColor = new Array(),
+    clickTool = new Array(),
+    clickSize = new Array(),
+    clickDrag = new Array(),
+    undoClickX = new Array(),
+    undoClickY= new Array(),
+    undoClickColor = new Array(),
+    undoClickTool = new Array(),
+    undoClickSize = new Array(),
+    undoClickDrag = new Array(),
+    undoFlags = new Array(),
+    curTool = "pencil",
+    mediumStartX = 200,
+    mediumStartY = 200,
+    drawingAreaX = 0,
+    drawingAreaY = 0,
+    paint = false;
+    undoFlag = false;
 
-    var x = "black",
-        y = 2;
-	
-    
-    function init() {
-        canvas = document.getElementById('can');
-		document.getElementById("radius").innerHTML = y;
-        ctx = canvas.getContext("2d");
-        w = canvas.width;
-        h = canvas.height;
-    
-        canvas.addEventListener("mousemove", function (e) {
-            findxy('move', e)
-        }, false);
-        canvas.addEventListener("mousedown", function (e) {
-            findxy('down', e)
-        }, false);
-        canvas.addEventListener("mouseup", function (e) {
-            findxy('up', e)
-        }, false);
-        canvas.addEventListener("mouseout", function (e) {
-            findxy('out', e)
-        }, false);
-    }
-    
-    function color(obj) {
-        switch (obj.id) {
-            case "green":
-                x = "green";
-                break;
-            case "blue":
-                x = "blue";
-                break;
-            case "red":
-                x = "red";
-                break;
-            case "yellow":
-                x = "yellow";
-                break;
-            case "orange":
-                x = "orange";
-                break;
-            case "black":
-                x = "black";
-                break;
-            case "white":
-                x = "white";
-                break;
-        }
-    
-    }
-    
-    function draw() {
-        ctx.beginPath();
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(currX, currY);
-        ctx.strokeStyle = x;
-        ctx.lineWidth = y;
-        ctx.stroke();
-        ctx.closePath();
-    }
-    
-    function erase() {
-        var m = confirm("Want to clear");
-        if (m) {
-            ctx.clearRect(0, 0, w, h);
-            document.getElementById("canvasimg").style.display = "none";
-        }
-    }
-    
-    function save(id) {
+var color = "black",
+    radius = 2;
 
-		var fileName = document.getElementById("filename").value;
-		var canvasElement = document.getElementById(id);
 
-		var MIME_TYPE = "image/png";
+function init() {
 
-		var imgURL = canvasElement.toDataURL(MIME_TYPE);
+    canvas = document.getElementById('can');
+    document.getElementById("radius").innerHTML = radius;
+    context = canvas.getContext("2d");
+    canvasWidth = canvas.width;
+    canvasHeight = canvas.height;
 
-		var dlLink = document.createElement('a');
-		dlLink.download = fileName;
-		dlLink.href = imgURL;
-		dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
-		
-		login = getLogin();
-		addImageToDatabase(login, fileName);
-		
-		document.body.appendChild(dlLink);
-		dlLink.click();
-		document.body.removeChild(dlLink);
-	}
-    
-    function findxy(res, e) {
-        if (res == 'down') {
-            prevX = currX;
-            prevY = currY;
-            currX = e.clientX - canvas.offsetLeft;
-            currY = e.clientY - canvas.offsetTop;
-    
-            flag = true;
-            dot_flag = true;
-            if (dot_flag) {
-                ctx.beginPath();
-                ctx.fillStyle = x;
-                ctx.fillRect(currX, currY, 2, 2);
-                ctx.closePath();
-                dot_flag = false;
-            }
+    canvas.addEventListener("mousemove", function (e) {
+        if (paint == true) {
+            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+            //undoFlag = true;
+            redraw();
         }
-        if (res == 'up' || res == "out") {
-            flag = false;
+    }, false);
+
+    canvas.addEventListener("mousedown", function (e) {
+        // Mouse down location
+        var mouseX = e.pageX - this.offsetLeft;
+        var mouseY = e.pageY - this.offsetTop;
+        paint = true;
+        //undoFlag = false;
+        addClick(mouseX, mouseY, false);
+        redraw();
+    }, false);
+
+    canvas.addEventListener("mouseup", function (e) {
+        paint = false;        
+        redraw();
+    }, false);
+
+    canvas.addEventListener("mouseleave", function (e) {
+        paint = false;
+    }, false);
+}
+
+function addClick(x, y, dragging) {
+    clickX.push(x);
+    clickY.push(y);
+    clickTool.push(curTool);
+    clickColor.push(color);
+    clickSize.push(radius);
+    clickDrag.push(dragging);
+}
+
+
+function clearCanvas() {
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
+}
+
+function erase() {
+    clickX.length = 0;
+    clickY.length = 0;
+    clickTool.length = 0;
+    clickColor.length = 0;
+    clickSize.length = 0;
+    clickDrag.length = 0;
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
+    /*undo();
+    redraw();*/
+}
+
+/**
+* Redraws the canvas.
+*/
+function redraw() {
+
+    clearCanvas()
+
+    var i = 0;
+    for (; i < clickX.length; i++) {
+
+        context.beginPath();
+        if (clickDrag[i] && i) {
+            context.moveTo(clickX[i - 1], clickY[i - 1]);
+        } else {
+            context.moveTo(clickX[i], clickY[i]);
         }
-        if (res == 'move') {
-            if (flag) {
-                prevX = currX;
-                prevY = currY;
-                currX = e.clientX - canvas.offsetLeft;
-                currY = e.clientY - canvas.offsetTop;
-                draw();
-            }
+        context.lineTo(clickX[i], clickY[i]);
+        context.closePath();
+
+        if (clickTool[i] == "eraser") {
+            context.strokeStyle = 'white';
+        } else {
+            context.strokeStyle = clickColor[i];
         }
+
+        context.lineJoin = "round";
+        context.lineWidth = clickSize[i];
+        context.stroke();
+
     }
-	
-	function moreRadius() {
-        y = y + 1;
-		document.getElementById("radius").innerHTML = y;
+}
+
+
+function colorPick(obj) {
+    switch (obj.id) {
+        case "green":
+            color = "green";
+            break;
+        case "blue":
+            color = "blue";
+            break;
+        case "red":
+            color = "red";
+            break;
+        case "yellow":
+            color = "yellow";
+            break;
+        case "orange":
+            color = "orange";
+            break;
+        case "black":
+            color = "black";
+            break;
+        case "white":
+            color = "white";
+            break;
     }
-	
-	function lessRadius(){
-		y = y - 1;
-		if(y<1) y=1;
-		document.getElementById("radius").innerHTML = y;
-	}
+
+}
+
+function save(id) {
+
+    var fileName = document.getElementById("filename").value;
+    var canvasElement = document.getElementById(id);
+
+    var MIME_TYPE = "image/png";
+
+    var imgURL = canvasElement.toDataURL(MIME_TYPE);
+
+    var dlLink = document.createElement('a');
+    dlLink.download = fileName;
+    dlLink.href = imgURL;
+    dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+
+    document.body.appendChild(dlLink);
+    dlLink.click();
+    document.body.removeChild(dlLink);
+}
+
+function moreRadius() {
+    radius = radius + 1;
+    document.getElementById("radius").innerHTML = radius;
+}
+
+function lessRadius() {
+    radius = radius - 1;
+    if (radius < 1) radius = 1;
+    document.getElementById("radius").innerHTML = radius;
+}
+
+function loadFromDatabase(imagesrc) {
+    var img = new Image();
+    img.src = imagesrc;
+    img.onload = function () {
+        context.drawImage(img, 0, 0);
+    }
+}
+
+function loadFromPC(){
+	var fileUploader = document.getElementById("fileUpload");
+	if ( fileUploader.files && fileUploader.files[0] ) {
+        var FR= new FileReader();
+        FR.onload = function(e) {
+           var img = new Image();
+           img.addEventListener("load", function() {
+             context.drawImage(img, 0, 0);
+           });
+           img.src = e.target.result;
+        };       
+        FR.readAsDataURL( fileUploader.files[0] );
+    }
+}
+
+//nie działa jak naleeży
+function undo() {
+    for(var i = 0; i < (clickX.length); i++) {
+        if(undoFlag) {
+            undoClickX.push(clickX.pop());
+            undoClickY.push(clickY.pop());
+            undoClickColor.push(clickColor.pop());
+            undoClickSize.push(clickSize.pop());
+            undoClickDrag.push(clickDrag.pop());
+        }        
+    }    
+}
+
+function choosePencil() {
+    curTool = "pencil";
+}
+
+function chooseEraser() {
+    curTool = "eraser";
+}
