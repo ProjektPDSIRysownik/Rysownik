@@ -25,6 +25,7 @@ var canvas, context, flag = false,
 var color = "black",
     radius = 2;
 
+var login;
 
 function init() {
 
