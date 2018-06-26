@@ -93,8 +93,6 @@ function erase() {
 */
 function redraw() {
 
-    clearCanvas()
-
     var i = 0;
     for (; i < clickX.length; i++) {
 
@@ -181,6 +179,14 @@ function lessRadius() {
 function loadFromDatabase(imagesrc) {
     var img = new Image();
     img.src = imagesrc;
+    img.onload = function () {
+        context.drawImage(img, 0, 0);
+    }
+}
+
+function loadTestImage() {
+    var img = new Image();
+    img.src = "img.png";
     img.onload = function () {
         context.drawImage(img, 0, 0);
     }
