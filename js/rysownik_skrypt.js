@@ -66,6 +66,16 @@ function clearCanvas() {
     context.clearRect(0, 0, canvasWidth, canvasHeight);
 }
 
+function erase() {
+    clickX.length = 0;
+    clickY.length = 0;
+    clickTool.length = 0;
+    clickColor.length = 0;
+    clickSize.length = 0;
+    clickDrag.length = 0;
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
+}
+
 /**
 * Redraws the canvas.
 */
