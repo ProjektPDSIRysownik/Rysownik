@@ -7,12 +7,20 @@ var canvas, context, flag = false,
     clickTool = new Array(),
     clickSize = new Array(),
     clickDrag = new Array(),
+    undoClickX = new Array(),
+    undoClickY= new Array(),
+    undoClickColor = new Array(),
+    undoClickTool = new Array(),
+    undoClickSize = new Array(),
+    undoClickDrag = new Array(),
+    undoFlags = new Array(),
     curTool = "pencil",
     mediumStartX = 200,
     mediumStartY = 200,
     drawingAreaX = 0,
     drawingAreaY = 0,
     paint = false;
+    undoFlag = false;
 
 var color = "black",
     radius = 2;
@@ -29,6 +37,7 @@ function init() {
     canvas.addEventListener("mousemove", function (e) {
         if (paint == true) {
             addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+            //undoFlag = true;
             redraw();
         }
     }, false);
@@ -38,12 +47,13 @@ function init() {
         var mouseX = e.pageX - this.offsetLeft;
         var mouseY = e.pageY - this.offsetTop;
         paint = true;
+        //undoFlag = false;
         addClick(mouseX, mouseY, false);
         redraw();
     }, false);
 
     canvas.addEventListener("mouseup", function (e) {
-        paint = false;
+        paint = false;        
         redraw();
     }, false);
 
@@ -74,6 +84,8 @@ function erase() {
     clickSize.length = 0;
     clickDrag.length = 0;
     context.clearRect(0, 0, canvasWidth, canvasHeight);
+    /*undo();
+    redraw();*/
 }
 
 /**
@@ -173,4 +185,25 @@ function load(imagesrc) {
         context.drawImage(img, 0, 0);
     }
     img.src = imagesrc;
+}
+
+//nie działa jak naleeży
+function undo() {
+    for(var i = 0; i < (clickX.length); i++) {
+        if(undoFlag) {
+            undoClickX.push(clickX.pop());
+            undoClickY.push(clickY.pop());
+            undoClickColor.push(clickColor.pop());
+            undoClickSize.push(clickSize.pop());
+            undoClickDrag.push(clickDrag.pop());
+        }        
+    }    
+}
+
+function choosePencil() {
+    curTool = "pencil";
+}
+
+function chooseEraser() {
+    curTool = "eraser";
 }
