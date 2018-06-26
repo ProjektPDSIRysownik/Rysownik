@@ -25,6 +25,7 @@ var canvas, context, flag = false,
 var color = "black",
     radius = 2;
 
+var login;
 
 function init() {
 
@@ -146,7 +147,7 @@ function colorPick(obj) {
 
 }
 
-function save(id) {
+function downloadImage(id) {
 
     var fileName = document.getElementById("filename").value;
     var canvasElement = document.getElementById(id);
@@ -160,11 +161,18 @@ function save(id) {
     dlLink.href = imgURL;
     dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
 
-	login = getLogin();
-	addImageToDatabase(login, fileName);
     document.body.appendChild(dlLink);
     dlLink.click();
     document.body.removeChild(dlLink);
+}
+
+function saveToDataBase(id) {
+
+    var fileName = document.getElementById("filename").value;
+    var canvasElement = document.getElementById(id);
+
+	login = getLogin();
+	addImageToDatabase(login, fileName);
 }
 
 function moreRadius() {
