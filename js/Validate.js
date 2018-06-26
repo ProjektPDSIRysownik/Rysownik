@@ -1,14 +1,24 @@
-function validateLogin(){
-var username = document.getElementById("username").value;
-var password = document.getElementById("pass").value;
+function validateLogin()
+{
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("pass").value;
 
-
-loginUser(username, password);
-var msg = getMsg();
-console.log(msg);
-if(getMsg() == "Zalogowano pomyslnie!"){
-	document.getElementById('user_login').innerHTML = username; 
-}
+	checkForLastLoggedInUser();
+	alert(lastUserStatus);
+	if(lastUserStatus == "BRAK")
+	{
+		loginUser(username, password);
+		addUserToSession(username)
+		var msg = getMsg();
+		console.log(msg);
+		if(getMsg() == "Zalogowano pomyslnie!"){
+			document.getElementById('user_login').innerHTML = username; 
+		}
+	}
+	else
+	{
+		alert("Nie mozna zalogowac ponownie: Uzytkownik jest juz zalogowany w systemie.");
+	}
 }
 
 function validateSignUp(){

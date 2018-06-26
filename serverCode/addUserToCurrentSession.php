@@ -4,29 +4,22 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "rysownik";
-$msg = "";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) 
+if ($conn->connect_error)
 {
     die("Connection failed: " . $conn->connect_error);
-} 
+}
 
-$output = array();
+$login = $_POST["login"];
 
-$sql = "SELECT `login`, `Password`, `email` FROM currentlyLoggedInUser";
+$sql = 'INSERT INTO `currentlyloggedinuser` (`login`, `Password`, `email`) VALUES ("' . $login . '"," test "," test ")';
 $result = $conn->query($sql);
-
-if ($result->num_rows == 0) 
-{
-    $output['msg'] = "BRAK";
+if ($conn->query($sql) === TRUE) {
+    echo "OK";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
-else
-{
-    $output['msg'] = "JEST";
-}
-
-echo json_encode($output);
 
 $conn->close();
 ?>
