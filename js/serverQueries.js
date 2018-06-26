@@ -1,6 +1,7 @@
 var message;
 var addInfo;
-var login = "kupka";
+var login;
+var userImages;
 
 function addUserToDatabase(signName, signMail, signPass){
     var xmlhttp = new XMLHttpRequest();
@@ -22,7 +23,7 @@ var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var myObj = JSON.parse(this.responseText);
-        return myObj.status;            // nie dziala jak powinno
+        return myObj.status;          
     }
 };
 xmlhttp.open("GET", "http://localhost/serverCode/checkLastLoggedInUser.php", true);
@@ -42,7 +43,7 @@ function loginUser(signName, signPass){
 			alert(message);
         }
     }
-    xmlhttp.open("POST", "http://localhost/serverCode/loginUser.php", true);
+    xmlhttp.open("POST", "http://localhost/serverCode/loginUser.php", false);
     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xmlhttp.send("login=" + signName + "&passwd=" + signPass);
 }
@@ -60,8 +61,24 @@ function addImageToDatabase(login, fileName){
     xmlhttp.send("login=" + login + "&image=" + fileName);
 }
 
+function getImagesFromDatabase(login){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function(){
+
+        if(this.readyState == 4 && this.status == 200){
+			var myArr = JSON.parse(this.responseText);
+			message = myArr.msg;
+			userImages = myArr.add_info;
+			alert(message);
+        }
+    }
+    xmlhttp.open("POST", "http://localhost/serverCode/getImages.php", false);
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp.send("login=" + login );
+}
+
 function getMsg(){
-  return msg;
+  return message;
 }
 
 function getAddInfo(){
@@ -70,4 +87,8 @@ function getAddInfo(){
 
 function getLogin(){
   return login;
+}
+
+function getUserImages(){
+  return userImages;
 }

@@ -4,6 +4,11 @@ var password = document.getElementById("pass").value;
 
 
 loginUser(username, password);
+var msg = getMsg();
+console.log(msg);
+if(getMsg() == "Zalogowano pomyslnie!"){
+	document.getElementById('user_login').innerHTML = username; 
+}
 }
 
 function validateSignUp(){
