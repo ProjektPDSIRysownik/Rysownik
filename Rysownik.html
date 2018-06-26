@@ -16,10 +16,10 @@
 <body onload="init()">
 
 <div class="container">
-	<div class="col-md-10">
+	<div class="col-md-12">
 		<div class="btn-group-login">
-			<button type="button" style="height:50px;width:100px" class = "btn btn-primary" data-toggle="modal" data-target="#myModal" >
-				Login
+			<button type="button" style="height:75px;width:200px" class = "btn btn-primary" data-toggle="modal" data-target="#myModal" >
+				Login/Register
 			</button>
 		</div>
 		
@@ -60,7 +60,7 @@
 						<br><br>					
 						<button class="btn btn-primary btn-sm" onclick="validateSignUp()">Sign Up</button>
 						<br><br>
-						<a  data-dismiss="modal" data-toggle="modal" data-target="#myModal">Already Have an account?</a>
+						<a  data-dismiss="modal" data-toggle="modal" data-target="#myModal">If you have an account already, click here.</a>
 					</div>
 				</div>
 			</div>
@@ -118,6 +118,7 @@
 			<p><button type="button" value="clear" id="clr" onclick="erase()" style="height:75px;width:200px" class="btn btn-default btn-lg" ><span aria-hidden="true"></span> Clear Sketchpad </button></p>
 		</div>
 		<div class="btn-group-color">
+
 			Choose Color : 
 			<button type="button" id="black" onclick="colorPick(this)" class="btn btn-default btn-lg" style="background:black"></button>
 			<button type="button" id="green" onclick="colorPick(this)" class="btn btn-default btn-lg" style="background:green"></button>
@@ -125,6 +126,7 @@
 			<button type="button" id="red" onclick="colorPick(this)" class="btn btn-default btn-lg" style="background:red"></button>
 			<button type="button" id="yellow" onclick="colorPick(this)" class="btn btn-default btn-lg" style="background:yellow"></button>
 			<button type="button" id="orange" onclick="colorPick(this)" class="btn btn-default btn-lg" style="background:orange"></button>
+
 		</div>
 		<div class = "btn-group-radius">
 			Radius: <span id="radius"> </span>
