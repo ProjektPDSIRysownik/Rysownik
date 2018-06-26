@@ -1,14 +1,24 @@
-function validateLogin(){
-var username = document.getElementById("username").value;
-var password = document.getElementById("pass").value;
+function validateLogin()
+{
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("pass").value;
 
-
-loginUser(username, password);
-var msg = getMsg();
-console.log(msg);
-if(getMsg() == "Zalogowano pomyslnie!"){
-	document.getElementById('user_login').innerHTML = username; 
-}
+	checkForLastLoggedInUser();
+	alert(lastUserStatus);
+	if(lastUserStatus == "BRAK")
+	{
+		loginUser(username, password);
+		addUserToSession(username); // dodaj do sesji
+		var msg = getMsg();
+		console.log(msg);
+		if(getMsg() == "Zalogowano pomyslnie!"){
+			document.getElementById('user_login').innerHTML = username; 
+		}
+	}
+	else
+	{
+		alert("Nie mozna zalogowac ponownie: Uzytkownik jest juz zalogowany w systemie.");
+	}
 }
 
 function validateSignUp(){
@@ -66,3 +76,12 @@ function passwordCheck(password){
 	return 1;
 
 }
+
+
+function logOutFromSess()
+{
+	logOutFromSession(); // usun z sesji
+	alert("Wylogowano.");
+	document.getElementById('user_login').innerHTML = ""; 
+}
+

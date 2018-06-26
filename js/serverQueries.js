@@ -2,6 +2,8 @@ var message;
 var addInfo;
 var login;
 var userImages;
+var lastUserStatus;
+var currLogInUserName;
 
 function addUserToDatabase(signName, signMail, signPass){
     var xmlhttp = new XMLHttpRequest();
@@ -17,18 +19,46 @@ function addUserToDatabase(signName, signMail, signPass){
 
 }
 
-function checkForLastLoggedInUser()
-{
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        var myObj = JSON.parse(this.responseText);
-        return myObj.status;          
+function addUserToSession(signName){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function(){
+
+        if(this.readyState == 4 && this.status == 200){
+            currLogInUserName = signName;
+        }
     }
-};
-xmlhttp.open("GET", "http://localhost/serverCode/checkLastLoggedInUser.php", true);
-xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-xmlhttp.send(); 
+    xmlhttp.open("POST", "http://localhost/serverCode/operateCurrentSession.php", true);
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp.send("login=" + signName);
+
+}
+
+function logOutFromSession(){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function(){
+
+        if(this.readyState == 4 && this.status == 200){
+            currLogInUserName = none;
+        }
+    }
+    xmlhttp.open("POST", "http://localhost/serverCode/removeSession.php", true);
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp.send();
+
+}
+
+function checkForLastLoggedInUser(){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function(){
+
+        if(this.readyState == 4 && this.status == 200){
+            var myArr = JSON.parse(this.responseText);
+			lastUserStatus = myArr.msg;
+        }
+    }
+    xmlhttp.open("POST", "http://localhost/serverCode/checkLastLoggedInUser.php", false);
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp.send("login=" + signName + "&passwd=" + signPass);
 }
 
 function loginUser(signName, signPass){
@@ -91,4 +121,14 @@ function getLogin(){
 
 function getUserImages(){
   return userImages;
+}
+
+function getLoginStatus()
+{
+    return lastUserStatus;
+}
+
+function getLastLoginUserName()
+{
+    return currLogInUserName;
 }

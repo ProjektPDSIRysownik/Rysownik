@@ -4,29 +4,20 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "rysownik";
-$msg = "";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) 
+if ($conn->connect_error)
 {
     die("Connection failed: " . $conn->connect_error);
-} 
+}
 
-$output = array();
-
-$sql = "SELECT `login`, `Password`, `email` FROM currentlyLoggedInUser";
+$sql = 'TRUNCATE TABLE `currentlyloggedinuser`';
 $result = $conn->query($sql);
-
-if ($result->num_rows == 0) 
-{
-    $output['msg'] = "BRAK";
-}
-else
-{
-    $output['msg'] = "JEST";
+if ($conn->query($sql) === TRUE) {
+    echo "Usunieto z bazy - wylogowano";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-echo json_encode($output);
-
-$conn->close();
+    $conn->close();
 ?>
