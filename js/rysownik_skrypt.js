@@ -178,13 +178,27 @@ function lessRadius() {
     document.getElementById("radius").innerHTML = radius;
 }
 
-function load(imagesrc) {
+function loadFromDatabase(imagesrc) {
     var img = new Image();
-    
+    img.src = imagesrc;
     img.onload = function () {
         context.drawImage(img, 0, 0);
     }
-    img.src = imagesrc;
+}
+
+function loadFromPC(){
+	var fileUploader = document.getElementById("fileUpload");
+	if ( fileUploader.files && fileUploader.files[0] ) {
+        var FR= new FileReader();
+        FR.onload = function(e) {
+           var img = new Image();
+           img.addEventListener("load", function() {
+             context.drawImage(img, 0, 0);
+           });
+           img.src = e.target.result;
+        };       
+        FR.readAsDataURL( fileUploader.files[0] );
+    }
 }
 
 //nie działa jak naleeży
